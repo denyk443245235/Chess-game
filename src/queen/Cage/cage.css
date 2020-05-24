@@ -1,0 +1,12 @@
+.cage-container {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chessman {
+    width: 90%;
+    height: 90%;
+}
