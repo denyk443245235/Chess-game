@@ -1,0 +1,1 @@
+export const SELECT_CHESS = "SELECT_CHESS";

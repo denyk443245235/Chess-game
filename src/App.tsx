@@ -1,5 +1,5 @@
 import React from 'react';
-import Board from "./queen/Field/Board";
+import Board from "./components/Field/Board";
 
 
 function App() {
