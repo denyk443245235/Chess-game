@@ -1,9 +1,9 @@
-import pawn from './chessmans/pawn.png';
-import castle from './chessmans/castle.png';
-import elephant from  './chessmans/elephant.png';
-import horse from './chessmans/horse.png';
-import queen from './chessmans/queen.png';
-import king from './chessmans/king.png';
+import pawn from './chessIcons/pawn.png';
+import castle from './chessIcons/castle.png';
+import elephant from './chessIcons/elephant.png';
+import horse from './chessIcons/horse.png';
+import queen from './chessIcons/queen.png';
+import king from './chessIcons/king.png';
 export const createCages = () => {
     let cages = [];
     for (let j = 1;j < 9;j++) {

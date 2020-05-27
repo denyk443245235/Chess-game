@@ -9,7 +9,8 @@ interface Cage {
 }
 
 interface Props {
-    cage: Cage
+    cage: Cage,
+    isActiveChessSelected: boolean
 }
 
 export default class CageСomponent extends React.Component<Props> {
@@ -22,13 +23,15 @@ export default class CageСomponent extends React.Component<Props> {
 
     render() {
         let chessman;
-
         if (this.cage.chessman) {
              chessman = <img className="chessman" src={this.cage.chessman.img}/>
         }
 
-        return(
-            <div className="cage-container" style={{backgroundColor : this.cage.color}}>
+        const isActiveChessSelected = this.props.isActiveChessSelected;
+        let cageColor = isActiveChessSelected ? 'yellow' : this.cage.color;
+
+        return (
+            <div className="cage-container" style={{backgroundColor : cageColor}}>
                 {chessman}
             </div>
         )
