@@ -6,12 +6,14 @@ import queen from './chessIcons/queen.png';
 import king from './chessIcons/king.png';
 export const createCages = () => {
     let cages = [];
-    for (let j = 1;j < 9;j++) {
-            for (let i = 1; i< 9;i++) {
+    let index = -1;
+    for (let j = 1; j < 9; j++) {
+            for (let i = 1; i< 9; i++) {
+
+                index++;
 
                 let color;
                 let chessman;
-
 
                 if (j % 2 === 0) {
                     color = i % 2 === 0 ? 'white' : 'brown';
@@ -22,7 +24,8 @@ export const createCages = () => {
                 if (j === 7) {
                     chessman = {
                         role: 'pawn',
-                        img: pawn
+                        img: pawn,
+                        move: [ -8, -16]
                     }
                 } else if (j === 8) {
                     switch (i) {
@@ -30,7 +33,8 @@ export const createCages = () => {
                         case 8 :
                             chessman = {
                                 role: 'castle',
-                                img: castle
+                                img: castle,
+                                move: [ -10, -20]
                             }
                             break;
 
@@ -38,26 +42,32 @@ export const createCages = () => {
                         case 7:
                             chessman = {
                                 role: 'horse',
-                                img: horse
+                                img: horse,
+                                move: [ -15, -17]
                             };
                             break;
                         case 3:
                         case 6:
                             chessman = {
                                 role: 'elephant',
-                                img: elephant
+                                img: elephant,
+                                move: [ -10, -20]
                             };
                             break;
                         case 4:
                             chessman = {
                                 role: 'queen',
-                                img: queen
+                                img: queen,
+                                move: [ -10, -20]
+
                             };
                             break;
                         case 5:
                             chessman = {
                                 role: 'king',
-                                img: king
+                                img: king,
+                                move: [ -10, -20]
+
                             };
                             break;
                         default :
@@ -66,7 +76,7 @@ export const createCages = () => {
                 }
 
                 cages.push({
-                    index: i,
+                    index: index,
                     color: color,
                     chessman: chessman
                 });

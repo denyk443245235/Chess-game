@@ -1,19 +1,12 @@
 import React from "react";
+import { Cage } from "../../interfaces";
 import './cage.css';
-import {ChessMan} from "../../interfaces";
-
-interface Cage {
-    index: number,
-    color: string,
-    chessman?: ChessMan
-}
 
 interface Props {
     cage: Cage,
-    isActiveChessSelected: boolean
 }
 
-export default class CageСomponent extends React.Component<Props> {
+class CageСomponent extends React.Component<Props> {
     public cage: Cage;
 
     constructor (props: Props) {
@@ -22,13 +15,14 @@ export default class CageСomponent extends React.Component<Props> {
     };
 
     render() {
+        const isSelected  = this.cage.isSelected;
+        const isOnWay = this.cage.isOnWay;
+        const cageColor = isSelected || isOnWay ? "yellow" : this.cage.color;
         let chessman;
+
         if (this.cage.chessman) {
              chessman = <img className="chessman" src={this.cage.chessman.img}/>
         }
-
-        const isActiveChessSelected = this.props.isActiveChessSelected;
-        let cageColor = isActiveChessSelected ? 'yellow' : this.cage.color;
 
         return (
             <div className="cage-container" style={{backgroundColor : cageColor}}>
@@ -37,3 +31,6 @@ export default class CageСomponent extends React.Component<Props> {
         )
     }
 }
+
+
+export default CageСomponent;
