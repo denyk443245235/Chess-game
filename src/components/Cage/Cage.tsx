@@ -17,20 +17,20 @@ class CageСomponent extends React.Component<Props> {
     render() {
         const isSelected  = this.cage.isSelected;
         const isOnWay = this.cage.isOnWay;
-        const cageColor = isSelected || isOnWay ? "yellow" : this.cage.color;
+        const cageStyle = isSelected || isOnWay ?
+            { backgroundColor: "yellow", outline: "1px solid black"} :  { backgroundColor: this.cage.color};
         let chessman;
 
         if (this.cage.chessman) {
-             chessman = <img className="chessman" src={this.cage.chessman.img}/>
+             chessman = <img alt="" className="chessman" src={this.cage.chessman.img}/>
         }
 
         return (
-            <div className="cage-container" style={{backgroundColor : cageColor}}>
+            <div className="cage-container" style={cageStyle}>
                 {chessman}
             </div>
         )
     }
 }
-
 
 export default CageСomponent;

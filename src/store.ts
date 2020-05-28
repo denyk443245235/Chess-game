@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 import { createStore } from 'redux';
 import cages from './reducers/cages';
+import chess from './reducers/chess';
 let rootReducer =  combineReducers(
     {
-        cages
+        cages,
+        chess
     });
 
 export default createStore(rootReducer,

@@ -5,7 +5,7 @@ export interface ChessMan {
 }
 
 interface ChessState {
-    selectedChess: string,
+    selectedChessIndex: number,
     movedIndexes: Array<number>
 }
 

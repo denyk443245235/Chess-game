@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectChess } from '../../actions/cages';
+import { selectChess, moveChess } from '../../actions/cages';
 import { State } from "../../interfaces";
 import { Cage } from '../../interfaces';
 import CageComponent from "../Cage/Cage";
@@ -8,18 +8,24 @@ import './board.css';
 
 interface Props {
     cages: Array<Cage>,
-    selectChess: Function
+    selectedChessIndex: number,
+    selectChess: Function,
+    moveChess: Function
 }
 
   class Board extends React.Component<Props>{
 
-    selectChess (index: number) {
-        let chessman = this.props.cages[index].chessman;
+      chessAction (index: number) {
+        const selectedChessIndex = this.props.selectedChessIndex;
+        let cage =  this.props.cages[index];
+        let chessman = cage.chessman;
+        if (cage.isOnWay) {
+            this.props.moveChess(cage.index, selectedChessIndex);
+        }
+
         if (!!chessman) {
-
             let moveIndexes: Array<number> = [];
-
-            chessman.move.map((item: number) => {
+            chessman.move.forEach((item: number) => {
                 moveIndexes.push(index + item);
             });
 
@@ -34,7 +40,7 @@ interface Props {
             <div className='container'>
                 {cages.map((cage, index) => {
                     return (
-                        <div onClick={() => this.selectChess(index)}>
+                        <div onClick={() => this.chessAction(index)} key={index}>
                             <CageComponent cage={cage}
                             />
                         </div>
@@ -48,14 +54,18 @@ interface Props {
 
 const mapStateToProps = (state: State) => {
     return {
-        cages: state.cages
+        cages: state.cages,
+        selectedChessIndex: state.chess.selectedChessIndex
     }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        selectChess:(index: string, moveIndexes: Array<number>) => {
+        selectChess:(index: number, moveIndexes: Array<number>) => {
             dispatch(selectChess(index, moveIndexes));
+        },
+        moveChess: (cageIndex: number, selectedChessIndex: number) => {
+            dispatch(moveChess(cageIndex, selectedChessIndex));
         }
     }
 };
