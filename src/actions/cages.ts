@@ -2,10 +2,11 @@ import {
     SELECT_CHESS,
     MOVE_CHESS
 } from '../constants';
-export const selectChess = (index: number, movedIndexes: Array<number>) => {
+export const selectChess = (index: number, movedIndexes: Array<number>, role: string) => {
     return {
         type : SELECT_CHESS,
         selectedIndex: index,
+        role,
         movedIndexes
     }
 };

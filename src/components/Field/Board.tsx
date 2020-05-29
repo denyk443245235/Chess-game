@@ -5,10 +5,11 @@ import { State } from "../../interfaces";
 import { Cage } from '../../interfaces';
 import CageComponent from "../Cage/Cage";
 import './board.css';
+import {getMoveIndexes} from "../../service";
 
 interface Props {
     cages: Array<Cage>,
-    selectedChessIndex: number,
+    selectedChess: any,
     selectChess: Function,
     moveChess: Function
 }
@@ -16,7 +17,7 @@ interface Props {
   class Board extends React.Component<Props>{
 
       chessAction (index: number) {
-        const selectedChessIndex = this.props.selectedChessIndex;
+        const selectedChessIndex = this.props.selectedChess.index;
         let cage =  this.props.cages[index];
         let chessman = cage.chessman;
         if (cage.isOnWay) {
@@ -24,12 +25,8 @@ interface Props {
         }
 
         if (!!chessman) {
-            let moveIndexes: Array<number> = [];
-            chessman.move.forEach((item: number) => {
-                moveIndexes.push(index + item);
-            });
-
-            this.props.selectChess(index, moveIndexes);
+            let moveIndexes = getMoveIndexes(index, chessman);
+            this.props.selectChess(index, moveIndexes, chessman.role);
         }
     }
 
@@ -53,16 +50,17 @@ interface Props {
 };
 
 const mapStateToProps = (state: State) => {
+    console.log(state);
     return {
         cages: state.cages,
-        selectedChessIndex: state.chess.selectedChessIndex
+        selectedChess: state.selectedChess
     }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        selectChess:(index: number, moveIndexes: Array<number>) => {
-            dispatch(selectChess(index, moveIndexes));
+        selectChess:(index: number, moveIndexes: Array<number>, role: string) => {
+            dispatch(selectChess(index, moveIndexes, role));
         },
         moveChess: (cageIndex: number, selectedChessIndex: number) => {
             dispatch(moveChess(cageIndex, selectedChessIndex));

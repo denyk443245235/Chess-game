@@ -1,17 +1,18 @@
 export interface ChessMan {
     move: Array<number>;
     role: string,
-    img: string
+    img: string,
+    x: number,
+    y: number
 }
 
 interface ChessState {
-    selectedChessIndex: number,
-    movedIndexes: Array<number>
+    index: number | undefined,
 }
 
 export interface State {
-    chess: ChessState,
-    cages: any
+    selectedChess: ChessState,
+    cages: Array<Cage>
 }
 
 export interface Cage {
@@ -19,5 +20,5 @@ export interface Cage {
     color: string
     chessman?: ChessMan,
     isSelected?: boolean,
-    isOnWay?: boolean
+    isOnWay?: boolean,
 }

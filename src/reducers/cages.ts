@@ -4,7 +4,7 @@ import { Cage } from '../interfaces';
 const initialState = createCages();
 
 export default function CagesReducer(state = initialState, action: any) {
-    const arrayCopy : Array<Cage> = [...state];
+    const arrayCopy : Array<any> = [...state];
 
     switch (action.type){
         case SELECT_CHESS :
@@ -12,21 +12,25 @@ export default function CagesReducer(state = initialState, action: any) {
             arrayCopy.forEach((cage: Cage, index: number) => {
                 if (index === selectedIndex) {
                     cage.isSelected = true;
-                    movedIndexes.forEach((item: number) => {
-                       arrayCopy[item].isOnWay = true;
-                    })
+                    for (let i = 0; i < movedIndexes.length; i++) {
+                        let item = movedIndexes[i];
+                        let chessman = arrayCopy[item].chessman;
+                        if (!chessman ) {
+                            arrayCopy[item].isOnWay = true;
+                        }
+
+                    }
                     return;
-                } else {
-                    cage.isOnWay = false;
-                    cage.isSelected = false;
                 }
             })
             return arrayCopy;
         case MOVE_CHESS:
             let { selectedChessIndex, cageIndex} = action;
-            let chessman = arrayCopy[selectedChessIndex].chessman;
+            const chessman = arrayCopy[selectedChessIndex].chessman;
+            cageIndex-= 1;
             arrayCopy[cageIndex].chessman = chessman;
             delete  arrayCopy[selectedChessIndex].chessman;
+
             arrayCopy.forEach((cage: Cage, index) => {
                 cage.isOnWay = false;
                 cage.isSelected = false;

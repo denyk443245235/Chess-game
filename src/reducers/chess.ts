@@ -1,7 +1,7 @@
 import { SELECT_CHESS } from "../constants";
 
 const initialState = {
-    selectedChessIndex: undefined
+    index: null
 };
 
 export default function ChessReducer(state = initialState, action: any) {
@@ -10,7 +10,8 @@ export default function ChessReducer(state = initialState, action: any) {
         case SELECT_CHESS :
             return {
                 ...state,
-                selectedChessIndex: action.selectedIndex
+                index: action.selectedIndex,
+                role: action.role
             };
         default:
             return state;
