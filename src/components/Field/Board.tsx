@@ -14,6 +14,7 @@ interface Props {
    moveChess: Function
 }
 
+
 class Board extends React.Component<Props>{
 
    chessAction (index: number) {

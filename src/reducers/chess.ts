@@ -4,6 +4,7 @@ const initialState = {
    index: null
 };
 
+
 export default function ChessReducer(state = initialState, action: any) {
    switch (action.type) {
       case SELECT_CHESS :

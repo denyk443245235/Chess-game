@@ -3,6 +3,7 @@ import { createCages } from '../service';
 import { Cage } from '../interfaces';
 const initialState = createCages();
 
+
 export default function CagesReducer(state = initialState, action: any) {
    const arrayCopy : Array<any> = [...state];
    

@@ -8,7 +8,6 @@ interface Props {
 
 class CageСomponent extends React.Component<Props> {
    public cage: Cage;
-   
    constructor (props: Props) {
       super(props);
       this.cage = this.props.cage;
