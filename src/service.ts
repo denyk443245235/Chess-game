@@ -4,13 +4,12 @@ import elephant from './chessIcons/elephant.png';
 import horse from './chessIcons/horse.png';
 import queen from './chessIcons/queen.png';
 import king from './chessIcons/king.png';
-import {ChessMan} from "./interfaces";
-import {func} from "prop-types";
+import {ChessMan, moveIndexes} from "./interfaces";
 
-let leftBoarder = [0,8,16,24,32,40,48,56];
-let rightBoarder = [7,15,23,31,39,47,55,63];
-let topBorder = [0,1,2,3,4,5,6,7];
-let bottomBorder = [55,56,57,58,59,60,61,62,63];
+let leftBoarder = [0, 8, 16, 24, 32, 40, 48, 56];
+let rightBoarder = [7, 15, 23, 31, 39, 47, 55, 63];
+let topBorder = [0, 1, 2, 3, 4, 5, 6, 7];
+let bottomBorder = [55, 56, 57, 58, 59, 60, 61, 62, 63];
 
 export const createCages = () => {
    let cages = [];
@@ -97,7 +96,7 @@ export const createCages = () => {
 
 export const getMoveIndexes = (index: number, chessman: ChessMan) => {
    
-   let moveIndexes:any = {
+   let moveIndexes: moveIndexes = {
       top: [],
       down: [],
       left: [],
@@ -113,11 +112,11 @@ export const getMoveIndexes = (index: number, chessman: ChessMan) => {
          
       case 'elephant':
          moveIndexes = getDiagonalWay(index, moveIndexes);
-         
          break;
    
       case 'castle':
-      
+         moveIndexes = getFrontWay(index, moveIndexes);
+         break;
       default:
          chessman.move.forEach((item: number) => {
             moveIndexes.top.push(index + item);
@@ -183,4 +182,5 @@ const getDiagonalWay = (index: number, moveIndexes:any) => {
       i+= 9;
       moveIndexes.down.push(i);
    }
+   return moveIndexes;
 };

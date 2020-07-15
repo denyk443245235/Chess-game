@@ -22,3 +22,10 @@ export interface Cage {
    isSelected?: boolean,
    isOnWay?: boolean,
 }
+
+export interface moveIndexes {
+   top: Array<number>,
+   down: Array<number>,
+   left: Array<number>,
+   right: Array<number>;
+}
