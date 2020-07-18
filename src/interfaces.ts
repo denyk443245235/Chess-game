@@ -28,4 +28,8 @@ export interface moveIndexes {
    down: Array<number>,
    left: Array<number>,
    right: Array<number>;
+   top_right: Array<number>;
+   top_left: Array<number>;
+   down_left: Array<number>;
+   down_right: Array<number>;
 }

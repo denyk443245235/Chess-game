@@ -5,15 +5,17 @@ import horse from './chessIcons/horse.png';
 import queen from './chessIcons/queen.png';
 import king from './chessIcons/king.png';
 import {ChessMan, moveIndexes} from "./interfaces";
+import {
+   leftBoarder,
+   rightBoarder,
+   topBorder,
+   bottomBorder
+} from  './constants';
 
-let leftBoarder = [0, 8, 16, 24, 32, 40, 48, 56];
-let rightBoarder = [7, 15, 23, 31, 39, 47, 55, 63];
-let topBorder = [0, 1, 2, 3, 4, 5, 6, 7];
-let bottomBorder = [55, 56, 57, 58, 59, 60, 61, 62, 63];
 
 export const createCages = () => {
    let cages = [];
-   let index = 0;
+   let index = -1;
    
    for (let j = 1; j < 9; j++) {
       for (let i = 1; i < 9; i++) {
@@ -100,14 +102,17 @@ export const getMoveIndexes = (index: number, chessman: ChessMan) => {
       top: [],
       down: [],
       left: [],
-      right: []
+      right: [],
+      top_right:[],
+      top_left:[],
+      down_left:[],
+      down_right:[]
    };
-
    
    switch (chessman.role) {
-   
       case 'queen' :
-        moveIndexes = getFrontWay(index, moveIndexes);
+         moveIndexes = getDiagonalWay(index, moveIndexes);
+         moveIndexes = getFrontWay(index, moveIndexes);
          break;
          
       case 'elephant':
@@ -127,9 +132,8 @@ export const getMoveIndexes = (index: number, chessman: ChessMan) => {
 
 
 
-const getFrontWay = (index: number, moveIndexes:any) => {
+const getFrontWay = (index: number, moveIndexes: any) => {
    let i = index;
-   
    while (!topBorder.includes(i)) {
       i -= 8;
       moveIndexes.top.push(i);
@@ -138,7 +142,9 @@ const getFrontWay = (index: number, moveIndexes:any) => {
    
    while (!bottomBorder.includes(i)) {
       i += 8;
+      console.log(i);
       moveIndexes.down.push(i);
+      console.log(moveIndexes.down);
    }
    i = index;
    
@@ -152,6 +158,7 @@ const getFrontWay = (index: number, moveIndexes:any) => {
       i += 1;
       moveIndexes.right.push(i);
    }
+   
    return moveIndexes;
 };
 
@@ -162,25 +169,25 @@ const getDiagonalWay = (index: number, moveIndexes:any) => {
    i = index;
    while (!(leftBoarder.includes(i) || topBorder.includes(i))) {
       i-=9;
-      moveIndexes.left.push(i);
+      moveIndexes.top_left.push(i);
    }
    i = index;
    
    while (!(rightBoarder.includes(i) || topBorder.includes(i)) ) {
       i-= 7;
-      moveIndexes.right.push(i);
+      moveIndexes.top_right.push(i);
    }
    i = index;
    
    while (!(leftBoarder.includes(i) || bottomBorder.includes(i))) {
       i+=7;
-      moveIndexes.top.push(i);
+      moveIndexes.down_right.push(i);
    }
    i = index;
    
    while (!(rightBoarder.includes(i) || bottomBorder.includes(i)) ) {
       i+= 9;
-      moveIndexes.down.push(i);
+      moveIndexes.down_left.push(i);
    }
    return moveIndexes;
 };

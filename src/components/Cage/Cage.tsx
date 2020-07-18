@@ -17,7 +17,7 @@ class CageСomponent extends React.Component<Props> {
       const isSelected  = this.cage.isSelected;
       const isOnWay = this.cage.isOnWay;
       const cageStyle = isSelected || isOnWay ?
-         { backgroundColor: "yellow", outline: "1px solid black"} :  { backgroundColor: this.cage.color};
+         {boxShadow: 'inset 0px 0px 20px 5px yellow'} : {boxShadow: 'none'};
       let chessman;
       
       if (this.cage.chessman) {
@@ -25,7 +25,7 @@ class CageСomponent extends React.Component<Props> {
       }
       
       return (
-         <div className="cage-container" style={cageStyle}>
+         <div className="cage-container" style={{...cageStyle, backgroundColor: this.cage.color}}>
             {chessman}
          </div>
       )
